@@ -29,46 +29,47 @@ WaitingRoom combines a **0–100 Blocking Impact Score Engine**, **deterministic
 
 ### 1. Overview Dashboard & Visualizations
 *Animated Kinetic Risk Radar circular gauge, Category Velocity spectrum bars, and 14-Day Calendar Timeline Matrix:*
-![Overview Dashboard](docs/screenshots/dashboard_visualization_suite_1786964321148.png)
+![Overview Dashboard](https://raw.githubusercontent.com/Nitin-Mane/WaitingRoom/main/docs/screenshots/dashboard_visualization_suite_1786964321148.png)
 
 ---
 
 ### 2. Waiting Items Directory & Multi-Faceted Filters
 *Dense directory with real-time status filtering, category tabs, and blocking impact scores:*
-![Waiting Items Directory](docs/screenshots/waiting_items_directory_1786961067593.png)
+![Waiting Items Directory](https://raw.githubusercontent.com/Nitin-Mane/WaitingRoom/main/docs/screenshots/waiting_items_directory_1786961067593.png)
 
 ---
 
 ### 3. Kinetic Focus Flow (Distraction-Free Triage)
 *Rapid 1-by-1 triage card flow with factor score breakdowns, recommendation rationale, and one-click actions:*
-![Kinetic Focus Mode](docs/screenshots/kinetic_focus_flow_1786961144009.png)
+![Kinetic Focus Mode](https://raw.githubusercontent.com/Nitin-Mane/WaitingRoom/main/docs/screenshots/kinetic_focus_flow_1786961144009.png)
 
 ---
 
 ### 4. Follow-Up Message Composer & Communication Templates
 *Context-aware message generator with adjustable tones (Polite, Firm, Executive) and audit trail logging:*
-![Follow-up Composer](docs/screenshots/composer_view_1786961167461.png)
+![Follow-up Composer](https://raw.githubusercontent.com/Nitin-Mane/WaitingRoom/main/docs/screenshots/composer_view_1786961167461.png)
 
 ---
 
 ### 5. Notification Center & Real-Time Action Feed
 *Categorized feed for Action Required, Completed Resolutions, Upcoming Deadlines, and Local System Status:*
-![Notification Center](docs/screenshots/notification_center_1786962376448.png)
+![Notification Center](https://raw.githubusercontent.com/Nitin-Mane/WaitingRoom/main/docs/screenshots/notification_center_1786962376448.png)
 
 ---
 
 ### 6. Profile & Account Settings Suite
 *User details, avatar customization, local-first sandbox diagnostics, and session switching:*
-![Profile & Account Settings](docs/screenshots/profile_settings_updated_1786962444667.png)
+![Profile & Account Settings](https://raw.githubusercontent.com/Nitin-Mane/WaitingRoom/main/docs/screenshots/profile_settings_updated_1786962444667.png)
 
 ---
 
 ### 7. Animated Startup & Authentication
 *Pulsing brand logo, glowing particle mesh, Sign In, Sign Up, and Profile-Based Quick Login:*
 <p align="center">
-  <img src="docs/screenshots/sign_in_view_1786963060565.png" width="48%" alt="Sign In View" />
-  <img src="docs/screenshots/profiles_view_1786963094549.png" width="48%" alt="Profile Switcher" />
+  <img src="https://raw.githubusercontent.com/Nitin-Mane/WaitingRoom/main/docs/screenshots/sign_in_view_1786963060565.png" width="48%" alt="Sign In View" />
+  <img src="https://raw.githubusercontent.com/Nitin-Mane/WaitingRoom/main/docs/screenshots/profiles_view_1786963094549.png" width="48%" alt="Profile Switcher" />
 </p>
+
 
 ---
 

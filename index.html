@@ -32,18 +32,11 @@
   <script src="https://www.gstatic.com/firebasejs/12.17.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/12.17.1/firebase-analytics-compat.js"></script>
 
-  <!-- Firebase Project Config — auto-injected so the app connects on load -->
-  <script>
-    window.FIREBASE_CONFIG = {
-      apiKey: "AIzaSyBOv4FqWi1j-mTHE9Yg6tuJaGQxwBK3lNw",
-      authDomain: "waitingroom-eb72a.firebaseapp.com",
-      projectId: "waitingroom-eb72a",
-      storageBucket: "waitingroom-eb72a.firebasestorage.app",
-      messagingSenderId: "474987491590",
-      appId: "1:474987491590:web:5496a69e3439075076ae87",
-      measurementId: "G-R1Z2L5RK6Y"
-    };
-  </script>
+  <!-- Firebase Project Config — loaded from external file (gitignored, injected by CI/CD) -->
+  <!-- In local dev: copy firebase-config.example.js → firebase-config.js and fill in values -->
+  <!-- App works in local-first offline mode if this file is absent -->
+  <script src="./firebase-config.js" onerror="console.info('[WaitingRoom] firebase-config.js not found — running in local-first offline mode.')"></script>
+
 
   <!-- Main Design System & Theme Styles -->
   <link rel="stylesheet" href="./styles/theme.css" />

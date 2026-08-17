@@ -7,6 +7,7 @@ npm-debug.log*
 firebase-debug.log
 firebase-debug.*.log
 .firebaserc.local
+firebase-config.js     # Real credentials — NEVER commit this file
 
 # OS
 .DS_Store
