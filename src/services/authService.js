@@ -168,7 +168,9 @@ export class AuthService {
   }
 
   async loginWithEmail(email, password) {
-    // 1. Try Firebase if connected
+    if (!email || !password) throw new Error('Please provide email and password.');
+
+    // 1. Try Firebase if connected and configured
     if (this.firebaseAuth) {
       try {
         const cred = await this.firebaseAuth.signInWithEmailAndPassword(email, password);
@@ -185,15 +187,24 @@ export class AuthService {
         this._setSession(user);
         return { success: true, user };
       } catch (err) {
-        // Return explicit error or fallback
-        throw err;
+        // These errors mean Firebase Email/Password isn't enabled in the console
+        // — fall through silently to local-first auth
+        const fallbackCodes = [
+          'auth/configuration-not-found',
+          'auth/operation-not-allowed',
+          'auth/admin-restricted-operation'
+        ];
+        if (fallbackCodes.includes(err.code)) {
+          console.warn('[Firebase] Email auth not enabled in console, using local-first mode:', err.code);
+          // fall through to local auth below
+        } else {
+          // Real errors (wrong password, user not found, network) — surface to user
+          throw new Error(this._friendlyAuthError(err));
+        }
       }
     }
 
-    // 2. Local-first simulation
-    if (!email || !password) throw new Error('Please provide email and password.');
-    
-    // Check if matches known profile
+    // 2. Local-first authentication
     const existing = PRESET_PROFILES.find(p => p.email.toLowerCase() === email.toLowerCase());
     const user = existing ? { ...existing, authProvider: 'local' } : {
       id: `usr_${Date.now()}`,
@@ -204,13 +215,14 @@ export class AuthService {
       avatar: email.substring(0, 2).toUpperCase(),
       authProvider: 'local'
     };
-
     this._setSession(user);
     return { success: true, user };
   }
 
   async signUpWithEmail(email, password, profileData = {}) {
-    // 1. Try Firebase if connected
+    if (!email || !password) throw new Error('Please provide email and password.');
+
+    // 1. Try Firebase if connected and configured
     if (this.firebaseAuth) {
       try {
         const cred = await this.firebaseAuth.createUserWithEmailAndPassword(email, password);
@@ -230,7 +242,20 @@ export class AuthService {
         this._setSession(user);
         return { success: true, user };
       } catch (err) {
-        throw err;
+        // These codes mean Email/Password provider isn't enabled in Firebase Console
+        // → fall through to local-first account creation silently
+        const fallbackCodes = [
+          'auth/configuration-not-found',
+          'auth/operation-not-allowed',
+          'auth/admin-restricted-operation'
+        ];
+        if (fallbackCodes.includes(err.code)) {
+          console.warn('[Firebase] Email sign-up not enabled in console, using local-first mode:', err.code);
+          // fall through to local account creation below
+        } else {
+          // Real errors (email-already-in-use, weak-password, network) — surface clearly
+          throw new Error(this._friendlyAuthError(err));
+        }
       }
     }
 
@@ -244,7 +269,6 @@ export class AuthService {
       avatar: (profileData.name || email).substring(0, 2).toUpperCase(),
       authProvider: 'local'
     };
-
     this._setSession(user);
     return { success: true, user };
   }
@@ -255,6 +279,7 @@ export class AuthService {
     this._setSession(user);
     return { success: true, user };
   }
+
 
   async loginAsGuest() {
     const user = {
@@ -268,6 +293,24 @@ export class AuthService {
     };
     this._setSession(user);
     return { success: true, user };
+  }
+
+  /**
+   * Translates Firebase Auth error codes into user-friendly messages.
+   */
+  _friendlyAuthError(err) {
+    const map = {
+      'auth/user-not-found':        'No account found with that email address.',
+      'auth/wrong-password':        'Incorrect password. Please try again.',
+      'auth/invalid-credential':    'Invalid email or password.',
+      'auth/email-already-in-use':  'An account with this email already exists. Please sign in instead.',
+      'auth/weak-password':         'Password must be at least 6 characters.',
+      'auth/invalid-email':         'Please enter a valid email address.',
+      'auth/too-many-requests':     'Too many failed attempts. Please wait a moment and try again.',
+      'auth/network-request-failed':'Network error. Please check your connection.',
+      'auth/user-disabled':         'This account has been disabled. Please contact support.'
+    };
+    return map[err.code] || err.message || 'Authentication failed. Please try again.';
   }
 
   _setSession(user) {
