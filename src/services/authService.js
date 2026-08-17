@@ -39,6 +39,8 @@ export class AuthService {
     this.currentUser = null;
     this.firebaseApp = null;
     this.firebaseAuth = null;
+    this.firebaseAnalytics = null;
+    this.firebaseReady = false;   // prevents duplicate init
     this.listeners = new Set();
   }
 
@@ -61,13 +63,19 @@ export class AuthService {
 
     if (config && config.apiKey) {
       try {
-        await this.initFirebase(config);
+        const ok = await this.initFirebase(config);
         // Persist the auto-loaded config so subsequent refreshes are consistent
-        if (!rawConfig) {
+        if (ok && !rawConfig) {
           localStorage.setItem('waitingroom_firebase_config', JSON.stringify(config));
         }
+        // If init failed and we had a stale stored config, clear it
+        if (!ok && rawConfig) {
+          console.warn('[Firebase] Clearing invalid stored config.');
+          localStorage.removeItem('waitingroom_firebase_config');
+        }
       } catch (e) {
-        console.warn('Firebase auto-initialization failed', e);
+        console.warn('[Firebase] Auto-initialization failed:', e.message);
+        // Don't let Firebase errors block the app
       }
     }
 
@@ -92,33 +100,58 @@ export class AuthService {
   }
 
   async initFirebase(config) {
-    if (typeof window !== 'undefined' && window.firebase && config && config.apiKey) {
-      try {
-        if (!window.firebase.apps.length) {
-          this.firebaseApp = window.firebase.initializeApp(config);
-        } else {
-          this.firebaseApp = window.firebase.app();
-        }
-        this.firebaseAuth = window.firebase.auth();
+    // Guard: already initialized successfully
+    if (this.firebaseReady) return true;
 
-        // Initialize Analytics when measurementId is available
-        if (config.measurementId && window.firebase.analytics) {
-          try {
-            this.firebaseAnalytics = window.firebase.analytics();
-            console.info('[Firebase] Analytics initialized:', config.measurementId);
-          } catch (analyticsErr) {
-            console.warn('[Firebase] Analytics init skipped:', analyticsErr.message);
-          }
-        }
-
-        console.info('[Firebase] Connected to project:', config.projectId);
-        return true;
-      } catch (err) {
-        console.error('Firebase init error', err);
-        return false;
-      }
+    if (typeof window === 'undefined' || !window.firebase) {
+      console.warn('[Firebase] SDK not loaded yet.');
+      return false;
     }
-    return false;
+
+    if (!config || !config.apiKey) {
+      console.warn('[Firebase] Invalid config — missing apiKey.');
+      return false;
+    }
+
+    try {
+      // Avoid "duplicate app" error — reuse existing app if already initialized
+      if (window.firebase.apps && window.firebase.apps.length > 0) {
+        this.firebaseApp = window.firebase.app();
+      } else {
+        this.firebaseApp = window.firebase.initializeApp(config);
+      }
+
+      // Initialize Auth
+      this.firebaseAuth = window.firebase.auth();
+
+      // Initialize Analytics safely — it requires measurementId and browser support
+      if (config.measurementId && window.firebase.analytics) {
+        try {
+          // analytics() is synchronous in compat SDK
+          this.firebaseAnalytics = window.firebase.analytics();
+          console.info('[Firebase] Analytics initialized:', config.measurementId);
+        } catch (analyticsErr) {
+          // Non-fatal: analytics blocked by ad-blocker or privacy settings
+          console.warn('[Firebase] Analytics unavailable (likely ad-blocker):', analyticsErr.message);
+        }
+      }
+
+      this.firebaseReady = true;
+      console.info('[Firebase] ✅ Connected to project:', config.projectId);
+      return true;
+    } catch (err) {
+      // Handle specific Firebase errors gracefully
+      if (err.code === 'app/duplicate-app') {
+        // App already exists — just get the reference
+        this.firebaseApp = window.firebase.app();
+        this.firebaseAuth = window.firebase.auth();
+        this.firebaseReady = true;
+        console.info('[Firebase] ✅ Reusing existing app:', config.projectId);
+        return true;
+      }
+      console.error('[Firebase] Init error:', err.code, err.message);
+      return false;
+    }
   }
 
   async saveFirebaseConfig(config) {
