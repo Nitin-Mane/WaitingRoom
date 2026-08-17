@@ -29,46 +29,66 @@ WaitingRoom combines a **0–100 Blocking Impact Score Engine**, **deterministic
 
 ### 1. Overview Dashboard & Visualizations
 *Animated Kinetic Risk Radar circular gauge, Category Velocity spectrum bars, and 14-Day Calendar Timeline Matrix:*
-![Overview Dashboard](https://raw.githubusercontent.com/Nitin-Mane/WaitingRoom/main/docs/screenshots/dashboard_visualization_suite_1786964321148.png)
+
+<p align="center">
+  <img src="https://waitingroom-eb72a.web.app/docs/screenshots/dashboard_visualization_suite_1786964321148.png" alt="Overview Dashboard" width="90%" />
+</p>
 
 ---
 
 ### 2. Waiting Items Directory & Multi-Faceted Filters
 *Dense directory with real-time status filtering, category tabs, and blocking impact scores:*
-![Waiting Items Directory](https://raw.githubusercontent.com/Nitin-Mane/WaitingRoom/main/docs/screenshots/waiting_items_directory_1786961067593.png)
+
+<p align="center">
+  <img src="https://waitingroom-eb72a.web.app/docs/screenshots/waiting_items_directory_1786961067593.png" alt="Waiting Items Directory" width="90%" />
+</p>
 
 ---
 
 ### 3. Kinetic Focus Flow (Distraction-Free Triage)
 *Rapid 1-by-1 triage card flow with factor score breakdowns, recommendation rationale, and one-click actions:*
-![Kinetic Focus Mode](https://raw.githubusercontent.com/Nitin-Mane/WaitingRoom/main/docs/screenshots/kinetic_focus_flow_1786961144009.png)
+
+<p align="center">
+  <img src="https://waitingroom-eb72a.web.app/docs/screenshots/kinetic_focus_flow_1786961144009.png" alt="Kinetic Focus Mode" width="90%" />
+</p>
 
 ---
 
 ### 4. Follow-Up Message Composer & Communication Templates
 *Context-aware message generator with adjustable tones (Polite, Firm, Executive) and audit trail logging:*
-![Follow-up Composer](https://raw.githubusercontent.com/Nitin-Mane/WaitingRoom/main/docs/screenshots/composer_view_1786961167461.png)
+
+<p align="center">
+  <img src="https://waitingroom-eb72a.web.app/docs/screenshots/composer_view_1786961167461.png" alt="Follow-up Composer" width="90%" />
+</p>
 
 ---
 
 ### 5. Notification Center & Real-Time Action Feed
 *Categorized feed for Action Required, Completed Resolutions, Upcoming Deadlines, and Local System Status:*
-![Notification Center](https://raw.githubusercontent.com/Nitin-Mane/WaitingRoom/main/docs/screenshots/notification_center_1786962376448.png)
+
+<p align="center">
+  <img src="https://waitingroom-eb72a.web.app/docs/screenshots/notification_center_1786962376448.png" alt="Notification Center" width="90%" />
+</p>
 
 ---
 
 ### 6. Profile & Account Settings Suite
 *User details, avatar customization, local-first sandbox diagnostics, and session switching:*
-![Profile & Account Settings](https://raw.githubusercontent.com/Nitin-Mane/WaitingRoom/main/docs/screenshots/profile_settings_updated_1786962444667.png)
+
+<p align="center">
+  <img src="https://waitingroom-eb72a.web.app/docs/screenshots/profile_settings_updated_1786962444667.png" alt="Profile Settings" width="90%" />
+</p>
 
 ---
 
 ### 7. Animated Startup & Authentication
 *Pulsing brand logo, glowing particle mesh, Sign In, Sign Up, and Profile-Based Quick Login:*
+
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Nitin-Mane/WaitingRoom/main/docs/screenshots/sign_in_view_1786963060565.png" width="48%" alt="Sign In View" />
-  <img src="https://raw.githubusercontent.com/Nitin-Mane/WaitingRoom/main/docs/screenshots/profiles_view_1786963094549.png" width="48%" alt="Profile Switcher" />
+  <img src="https://waitingroom-eb72a.web.app/docs/screenshots/sign_in_view_1786963060565.png" width="48%" alt="Sign In View" />
+  <img src="https://waitingroom-eb72a.web.app/docs/screenshots/profiles_view_1786963094549.png" width="48%" alt="Profile Switcher" />
 </p>
+
 
 
 ---

@@ -10,13 +10,19 @@
       ".git/**",
       ".gitignore",
       "node_modules/**",
-      "docs/**",
       "test/**",
       "README.md",
       "package.json",
       "package-lock.json",
       "*.log",
-      "*.md"
+      "docs/API_AND_STORAGE_SPEC.md",
+      "docs/ARCHITECTURE.md",
+      "docs/AUTHENTICATION_AND_FIREBASE.md",
+      "docs/RECOMMENDATION_ENGINE.md",
+      "docs/SCORING_ENGINE.md",
+      "docs/USER_GUIDE.md",
+      "docs/images/**",
+      "firebase-config.example.js"
     ],
     "cleanUrls": false,
     "trailingSlash": false,
@@ -38,6 +44,13 @@
         "source": "**/*.css",
         "headers": [
           { "key": "Cache-Control", "value": "public, max-age=3600" }
+        ]
+      },
+      {
+        "source": "**/*.@(png|jpg|jpeg|gif|webp|svg)",
+        "headers": [
+          { "key": "Cache-Control", "value": "public, max-age=86400" },
+          { "key": "Access-Control-Allow-Origin", "value": "*" }
         ]
       },
       {
