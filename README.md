@@ -110,7 +110,7 @@ WaitingRoom combines a **0–100 Blocking Impact Score Engine**, **deterministic
 ## 🏗️ System Architecture
 
 <p align="center">
-  <img src="docs/images/system_architecture_diagram.png" alt="WaitingRoom Architecture Diagram" width="100%" />
+  <img src="https://waitingroom-eb72a.web.app/docs/images/system_architecture_diagram.png" alt="WaitingRoom Architecture Diagram" width="100%" />
 </p>
 
 | Layer | Technology |

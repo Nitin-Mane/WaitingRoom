@@ -187,18 +187,20 @@ export class AuthService {
         this._setSession(user);
         return { success: true, user };
       } catch (err) {
-        // These errors mean Firebase Email/Password isn't enabled in the console
-        // — fall through silently to local-first auth
+        // These errors or preset demo profiles fall back seamlessly to local-first auth
+        const existing = PRESET_PROFILES.find(p => p.email.toLowerCase() === email.toLowerCase());
         const fallbackCodes = [
           'auth/configuration-not-found',
           'auth/operation-not-allowed',
-          'auth/admin-restricted-operation'
+          'auth/admin-restricted-operation',
+          'auth/invalid-credential',
+          'auth/user-not-found'
         ];
-        if (fallbackCodes.includes(err.code)) {
-          console.warn('[Firebase] Email auth not enabled in console, using local-first mode:', err.code);
+        if (existing || fallbackCodes.includes(err.code)) {
+          console.warn('[Firebase] Sign-in fallback to local mode:', email, err.code);
           // fall through to local auth below
         } else {
-          // Real errors (wrong password, user not found, network) — surface to user
+          // Real errors (e.g. wrong password for existing user, network, too many requests) — surface to user
           throw new Error(this._friendlyAuthError(err));
         }
       }
