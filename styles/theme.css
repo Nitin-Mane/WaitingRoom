@@ -1,0 +1,172 @@
+/**
+ * WaitingRoom Design System Theme Tokens
+ * Supports Dark Navy (default), Midnight OLED, Cyberpunk Slate, and Light Clean themes.
+ */
+
+:root, [data-theme="dark"] {
+  --theme-mode: dark;
+
+  /* Surfaces */
+  --bg-primary: #0b1326;
+  --bg-secondary: #0f172a;
+  --bg-surface: #131b2e;
+  --bg-surface-container: #171f33;
+  --bg-surface-high: #222a3d;
+  --bg-surface-highest: #2d3449;
+  --bg-surface-elevated: #334155;
+  --bg-input: #080e1d;
+  --bg-card: #131b2e;
+  --bg-card-hover: #1e293b;
+
+  /* Accent Colors */
+  --color-primary: #c0c1ff;
+  --color-primary-container: #8083ff;
+  --color-primary-dark: #494bd6;
+  --color-secondary: #d0bcff;
+  --color-tertiary: #ffb783;
+
+  /* Status Colors */
+  --status-completed: #22c55e;
+  --status-completed-bg: rgba(34, 197, 94, 0.15);
+  --status-approaching: #f59e0b;
+  --status-approaching-bg: rgba(245, 158, 11, 0.15);
+  --status-overdue: #ef4444;
+  --status-overdue-bg: rgba(239, 68, 68, 0.15);
+  --status-escalated: #a855f7;
+  --status-escalated-bg: rgba(168, 85, 247, 0.15);
+  --status-scheduled: #3b82f6;
+  --status-scheduled-bg: rgba(59, 130, 246, 0.15);
+  --status-inactive: #64748b;
+
+  /* Typography */
+  --text-main: #dae2fd;
+  --text-muted: #94a3b8;
+  --text-subtle: #64748b;
+  --text-on-primary: #07006c;
+  --text-heading: #f8fafc;
+
+  /* Borders & Outlines */
+  --border-subtle: #1e293b;
+  --border-medium: #334155;
+  --border-focus: #8083ff;
+  --outline-variant: #464554;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.6), 0 4px 6px -2px rgba(0, 0, 0, 0.4);
+  --shadow-modal: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+}
+
+/* 2. Midnight OLED Theme */
+[data-theme="midnight"] {
+  --theme-mode: dark;
+  --bg-primary: #030712;
+  --bg-secondary: #0b0f19;
+  --bg-surface: #0e131f;
+  --bg-surface-container: #111827;
+  --bg-surface-high: #1f2937;
+  --bg-surface-highest: #374151;
+  --bg-surface-elevated: #1f2937;
+  --bg-input: #030712;
+  --bg-card: #111827;
+  --bg-card-hover: #1f2937;
+
+  --color-primary: #a5b4fc;
+  --color-primary-container: #6366f1;
+  --color-primary-dark: #4338ca;
+
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
+  --text-subtle: #6b7280;
+  --text-heading: #ffffff;
+
+  --border-subtle: #1f2937;
+  --border-medium: #374151;
+  --border-focus: #6366f1;
+}
+
+/* 3. Cyberpunk Slate Theme */
+[data-theme="cyberpunk"] {
+  --theme-mode: dark;
+  --bg-primary: #080d1a;
+  --bg-secondary: #0d1527;
+  --bg-surface: #101a33;
+  --bg-surface-container: #13203f;
+  --bg-surface-high: #1b2d56;
+  --bg-surface-highest: #263e77;
+  --bg-surface-elevated: #1e3260;
+  --bg-input: #060a14;
+  --bg-card: #13203f;
+  --bg-card-hover: #1b2d56;
+
+  --color-primary: #38bdf8;
+  --color-primary-container: #0284c7;
+  --color-primary-dark: #0369a1;
+  --color-secondary: #c084fc;
+
+  --text-main: #e0f2fe;
+  --text-muted: #7dd3fc;
+  --text-subtle: #38bdf8;
+  --text-heading: #f0f9ff;
+
+  --border-subtle: #1b2d56;
+  --border-medium: #0284c7;
+  --border-focus: #38bdf8;
+}
+
+/* 4. Light Clean Theme */
+[data-theme="light"] {
+  --theme-mode: light;
+
+  /* Surfaces */
+  --bg-primary: #f8fafc;
+  --bg-secondary: #f1f5f9;
+  --bg-surface: #ffffff;
+  --bg-surface-container: #ffffff;
+  --bg-surface-high: #e2e8f0;
+  --bg-surface-highest: #cbd5e1;
+  --bg-surface-elevated: #ffffff;
+  --bg-input: #ffffff;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f8fafc;
+
+  /* Accent Colors */
+  --color-primary: #4f46e5;
+  --color-primary-container: #6366f1;
+  --color-primary-dark: #3730a3;
+  --color-secondary: #7c3aed;
+  --color-tertiary: #d97706;
+
+  /* Status Colors */
+  --status-completed: #16a34a;
+  --status-completed-bg: rgba(22, 163, 74, 0.12);
+  --status-approaching: #d97706;
+  --status-approaching-bg: rgba(217, 119, 6, 0.12);
+  --status-overdue: #dc2626;
+  --status-overdue-bg: rgba(220, 38, 38, 0.12);
+  --status-escalated: #9333ea;
+  --status-escalated-bg: rgba(147, 51, 234, 0.12);
+  --status-scheduled: #2563eb;
+  --status-scheduled-bg: rgba(37, 99, 235, 0.12);
+  --status-inactive: #64748b;
+
+  /* Typography */
+  --text-main: #0f172a;
+  --text-muted: #475569;
+  --text-subtle: #94a3b8;
+  --text-on-primary: #ffffff;
+  --text-heading: #020617;
+
+  /* Borders & Outlines */
+  --border-subtle: #e2e8f0;
+  --border-medium: #cbd5e1;
+  --border-focus: #4f46e5;
+  --outline-variant: #cbd5e1;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  --shadow-modal: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WaitingRoom — Local-First Dependency & Follow-up Tracker</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300..900;1,300..900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: ['class', '[data-theme="dark"]'],
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Hanken Grotesk"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Firebase SDK v12 (compat build — matches provided project config) -->
+  <script src="https://www.gstatic.com/firebasejs/12.17.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/12.17.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/12.17.1/firebase-analytics-compat.js"></script>
+
+  <!-- Firebase Project Config — auto-injected so the app connects on load -->
+  <script>
+    window.FIREBASE_CONFIG = {
+      apiKey: "AIzaSyBOv4FqWi1j-mTHE9Yg6tuJaGQxwBK3lNw",
+      authDomain: "waitingroom-eb72a.firebaseapp.com",
+      projectId: "waitingroom-eb72a",
+      storageBucket: "waitingroom-eb72a.firebasestorage.app",
+      messagingSenderId: "474987491590",
+      appId: "1:474987491590:web:5496a69e3439075076ae87",
+      measurementId: "G-R1Z2L5RK6Y"
+    };
+  </script>
+
+  <!-- Main Design System & Theme Styles -->
+  <link rel="stylesheet" href="./styles/theme.css" />
+  <link rel="stylesheet" href="./styles/main.css" />
+</head>
+<body class="select-none antialiased">
+  <!-- Application Shell -->
+  <div id="app-container">
+    <!-- Sidebar Navigation -->
+    <aside id="sidebar"></aside>
+
+    <!-- Main Content Stage -->
+    <main id="main-content">
+      <!-- Global Topbar -->
+      <header id="topbar"></header>
+
+      <!-- Dynamic View Container -->
+      <div id="view-container"></div>
+    </main>
+  </div>
+
+  <!-- In-App Toast Alert Container (top-right overlay) -->
+  <div id="toast-container" class="fixed top-4 right-4 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+  <!-- Modals Container -->
+  <div id="modals-container">
+    <!-- Quick Add Modal -->
+    <div id="quick-add-placeholder"></div>
+    <!-- Command Palette Modal -->
+    <div id="command-palette-placeholder"></div>
+    <!-- Shortcuts Modal -->
+    <div id="shortcuts-placeholder"></div>
+  </div>
+
+  <!-- Modal Templates -->
+  <script type="module">
+    import { QuickAddModal } from './src/components/quickAddModal.js';
+    import { ShortcutsModal } from './src/components/shortcutsModal.js';
+    import { CommandPalette } from './src/components/commandPalette.js';
+
+    document.getElementById('quick-add-placeholder').innerHTML = QuickAddModal.render();
+    document.getElementById('shortcuts-placeholder').innerHTML = ShortcutsModal.render();
+    
+    // Command palette template
+    const cp = new CommandPalette(null);
+    document.getElementById('command-palette-placeholder').innerHTML = cp.renderModal();
+  </script>
+
+  <!-- Application Bootstrap -->
+  <script type="module" src="./src/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+name: WaitingRoom CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test-and-verify:
+    name: Domain Tests & Engine Verification
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x, 22.x]
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Run Domain & Engine Verification Test Suite
+        run: npm test
+
+      - name: Validate Integrity & Asset Structure
+        run: |
+          node -e "
+            const fs = require('fs');
+            const files = ['index.html', 'src/app.js', 'styles/theme.css', 'styles/main.css'];
+            files.forEach(f => {
+              if (!fs.existsSync(f)) throw new Error('Missing critical core file: ' + f);
+            });
+            console.log('✓ All critical assets and core modules verified.');\
+          "
+
+      - name: Verify Firebase Config Files Exist
+        run: |
+          node -e "
+            const fs = require('fs');
+            ['firebase.json', '.firebaserc'].forEach(f => {
+              if (!fs.existsSync(f)) throw new Error('Missing Firebase config: ' + f);
+            });
+            console.log('✓ Firebase hosting config files verified.');
+          "
+
+  deploy:
+    name: Deploy to Firebase Hosting
+    runs-on: ubuntu-latest
+    needs: test-and-verify
+    # Only deploy on direct push to main/master (not PRs)
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+
+      - name: Deploy to Firebase Hosting
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_WAITINGROOM_EB72A }}
+          channelId: live
+          projectId: waitingroom-eb72a
+
