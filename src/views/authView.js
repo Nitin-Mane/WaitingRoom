@@ -195,57 +195,18 @@ export class AuthView {
               </div>
             ` : ''}
 
-            <!-- Firebase Console Link Bar -->
+            <!-- Security & Status Footer Bar -->
             <div class="pt-4 border-t border-slate-800 flex items-center justify-between text-[11px]">
-              <div class="flex items-center gap-1.5 ${isFirebaseConnected ? 'text-emerald-400' : 'text-amber-400'}">
-                <span class="w-2 h-2 rounded-full ${isFirebaseConnected ? 'bg-emerald-500' : 'bg-amber-500'}"></span>
-                <span>${isFirebaseConnected ? 'Firebase Connected' : 'Local Offline Auth Active'}</span>
+              <div class="flex items-center gap-1.5 ${isFirebaseConnected ? 'text-emerald-400' : 'text-slate-400'}">
+                <span class="w-2 h-2 rounded-full ${isFirebaseConnected ? 'bg-emerald-500' : 'bg-slate-500'}"></span>
+                <span>${isFirebaseConnected ? 'Firebase Cloud Sync Active' : 'Local Offline Auth Active'}</span>
               </div>
-
-              <button class="text-indigo-400 hover:text-indigo-200 underline font-medium cursor-pointer" onclick="window.app.toggleFirebaseConfigModal()">
-                ${isFirebaseConnected ? 'Firebase Settings' : 'Connect Firebase Console'}
-              </button>
+              <span class="text-slate-500 text-[10px]">Encrypted Workspace Session</span>
             </div>
-          </div>
-        </div>
-
-        <!-- Firebase Config Modal Overlay -->
-        <div id="firebase-config-modal" class="modal-overlay" onclick="if(event.target === this) window.app.toggleFirebaseConfigModal()">
-          <div class="modal-dialog max-w-lg bg-slate-900 border border-slate-700 p-6 space-y-4">
-            <div class="flex items-center justify-between pb-3 border-b border-slate-800">
-              <div class="flex items-center gap-2">
-                <span class="material-symbols-outlined text-amber-400 text-xl">local_fire_department</span>
-                <h3 class="text-sm font-bold text-slate-100">Firebase Console Connection</h3>
-              </div>
-              <button class="text-slate-400 hover:text-slate-200 material-symbols-outlined text-base" onclick="window.app.toggleFirebaseConfigModal()">close</button>
-            </div>
-
-            <p class="text-xs text-slate-400">
-              Enter your Firebase project credentials from the <strong class="text-slate-200">Firebase Console</strong> (Project Settings &rarr; General &rarr; Your apps).
-            </p>
-
-            <form onsubmit="window.app.handleSaveFirebaseConfig(event)" class="space-y-3 text-xs">
-              <div>
-                <label class="block font-semibold text-slate-300 mb-1">API Key</label>
-                <input name="apiKey" type="text" placeholder="AIzaSy..." value="${firebaseConfig.apiKey || ''}" class="w-full px-3 py-2 bg-slate-950 border border-slate-700 rounded-lg text-slate-100 text-xs font-mono" />
-              </div>
-              <div>
-                <label class="block font-semibold text-slate-300 mb-1">Auth Domain</label>
-                <input name="authDomain" type="text" placeholder="your-project.firebaseapp.com" value="${firebaseConfig.authDomain || ''}" class="w-full px-3 py-2 bg-slate-950 border border-slate-700 rounded-lg text-slate-100 text-xs font-mono" />
-              </div>
-              <div>
-                <label class="block font-semibold text-slate-300 mb-1">Project ID</label>
-                <input name="projectId" type="text" placeholder="your-project-id" value="${firebaseConfig.projectId || ''}" class="w-full px-3 py-2 bg-slate-950 border border-slate-700 rounded-lg text-slate-100 text-xs font-mono" />
-              </div>
-
-              <div class="flex items-center justify-end gap-2 pt-2">
-                <button type="button" class="btn-secondary" onclick="window.app.toggleFirebaseConfigModal()">Cancel</button>
-                <button type="submit" class="btn-primary">Save & Connect</button>
-              </div>
-            </form>
           </div>
         </div>
       </div>
     `;
   }
 }
+
