@@ -25,7 +25,7 @@ import { SettingsView } from './views/settingsView.js';
 import { SystemHealthView } from './views/systemHealthView.js';
 import { HelpDocumentationView } from './views/helpDocumentationView.js';
 import { NotificationCenterView } from './views/notificationCenterView.js';
-import { AuthView } from './views/authView.js';
+import { AuthView } from './views/authView.js?v=1.0.2';
 import { AuthService } from './services/authService.js';
 import { WaitingStatus } from './core/types.js';
 
